@@ -36,7 +36,7 @@ cd yamdb_final
 Cоздать и активировать виртуальное окружение:
 
 ```bash
-python3 -m venv env
+python3 -m venv venv
 ```
 
 ```bash
@@ -53,8 +53,9 @@ python3 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-Как создать .env файл:
-Находясь в директории infra/ выполните следующие команды:
+Создать .env файл:
+
+Перейдите в директорию infra/ и выполните следующие команды:
 ```bash
 touch .env
 ```
