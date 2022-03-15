@@ -1,6 +1,6 @@
 ## Учебный проект 16 спринта факультета бэкенд-разработки
 
-![example workflow](https://github.com/Shchegolyaev/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+![example workflow](https://github.com/Tar8117/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
 **Проект YaMDb собирает отзывы пользователей на произведения.**
 
@@ -11,7 +11,7 @@
 - Django
 - Docker
 - Nginx
-- И так далее (более подробно можно ознакомиться здесь `api_yamdb/requirements.txt`)
+- И так далее (более подробно можно ознакомиться здесь `yamdb_final/api_yamdb/requirements.txt`)
 
 
 ## Руководство по установке Docker
@@ -22,15 +22,15 @@
 Клонировать репозиторий:
 
 ```bash
-git clone https://github.com/Tar8117/infra_sp2.git
+https://github.com/Tar8117/yamdb_final.git
 ```
 Либо, если используете доступ к Github через SSH:
 ```bash
-git clone git@github.com:Tar8117/infra_sp2.git
+git@github.com:Tar8117/yamdb_final.git
 ```
 Перейти в склонированный репозиторий:
 ```bash
-cd api_yamdb/
+cd yamdb_final
 ```
 
 Cоздать и активировать виртуальное окружение:
@@ -40,7 +40,7 @@ python3 -m venv env
 ```
 
 ```bash
-source env/bin/activate
+source venv/bin/activate
 ```
 
 ```bash
@@ -53,39 +53,57 @@ python3 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+Как создать .env файл:
+Находясь в директории infra/ выполните следующие команды:
+```bash
+touch .env
+```
+```bash
+nano .env
+```
+Cкопируйте следующие значения в .env файл и сохраните изменения:
+```bash
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=oliver
+DB_HOST=db
+DB_PORT=5432
+```
+
 Запустить приложение в контейнерах:
 
 *из директории `infra/`*
 ```bash
-docker-compose up -d --build
+sudo docker-compose up -d --build
 ```
 
 Выполнить миграции:
 
 *из директории `infra/`*
 ```bash
-docker-compose exec web python manage.py migrate
+sudo docker-compose exec web python manage.py migrate
 ```
 
 Создать суперпользователя:
 
 *из директории `infra/`*
 ```bash
-docker-compose exec web python manage.py createsuperuser
+sudo docker-compose exec web python manage.py createsuperuser
 ```
 
 Собрать статику:
 
 *из директории `infra/`*
 ```bash
-docker-compose exec web python manage.py collectstatic --no-input
+sudo docker-compose exec web python manage.py collectstatic --no-input
 ```
 
 Остановить приложение в контейнерах:
 
 *из директории `infra/`*
 ```bash
-docker-compose down -v
+sudo docker-compose down -v
 ```
 Запуск `pytest`:
 
@@ -93,13 +111,7 @@ docker-compose down -v
 ```bash
 cd infra_sp2 && pytest
 ```
-### Создайте файл .env со значениями:
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=postgres
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=oliver
-DB_HOST=db
-DB_PORT=5432
+
 
 ### Документация API с примерами:
 
@@ -107,7 +119,7 @@ DB_PORT=5432
 /redoc/
 ```
 
-### описание команды для заполнения базы данными
+### Описание команды для заполнения базы данными
 ```bash
 cd api_yamdb && python manage.py loaddata ../infra/fixtures.json
 ```
